@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: pureconfig-core
+Implementation-Version: 0.17.1
+Specification-Vendor: com.github.pureconfig
+Specification-Title: pureconfig-core
+Implementation-Vendor-Id: com.github.pureconfig
+Specification-Version: 0.17.1
+Implementation-URL: https://github.com/pureconfig/pureconfig
+Implementation-Vendor: com.github.pureconfig
+
