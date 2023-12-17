@@ -8,5 +8,9 @@ This exercise is written in Scala 3 as it is backward compatible with Scala 2 fo
 3. Run `./open-spark-uis.sh` to open Spark UIs in your browser.
 4. Run `./run-ns-exercise.sh` to run the example code.
 
+See notes in run-on-cluster.sh for comments regarding running in client mode vs. cluster mode.
+
 NOTE: Does not contain a working solution. Pseudo-code used. 
 Exercise produces "hello world" style output.
+
+
