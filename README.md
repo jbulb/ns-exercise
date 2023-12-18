@@ -40,14 +40,14 @@ The `./run-ns-hello.sh` script is working and invokes spark-submit to produce li
 
 ## Additional Considerations
 
-### How will you make sure only delta/new records are pulled from RAW Zone to Processed Zone?
+### 1. How will you make sure only delta/new records are pulled from RAW Zone to Processed Zone?
 
 Use fault-tolerant semantics:
 https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#fault-tolerance-semantics
 
 ### 2. How to move the old data from RAW Zone so that it does not become very large?
 
-TBD. This may relate:
+This may relate:
 https://docs.databricks.com/en/delta/tune-file-size.html
 
 ### 3. How will you run these programs – Cluster or Client
