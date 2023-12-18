@@ -13,29 +13,22 @@ object NSConsumer:
       .getOrCreate()
     import spark.implicits.*
 
-    // read raw data
-    val rawDataDf = spark.read.option("header", true).csv("locomotives.csv")
-
-    // set up streaming dataframe
-    val producerDf = rawDataDf.
-      withColumn("value", concat_ws("|", $"LocomotiveId", $"Latitude", $"Longitude"))
-
-    // stream result to Kafka
-    producerDf
-      .writeStream
+    // subscribe to topic
+    // per Spark documentation for fault-tolerant semantics:
+    // https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#fault-tolerance-semantics
+    // to manage error handling, continuous streaming, and checkpoint restarts from an specific offset
+    val consumerDF = spark
+      .read
       .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
-      .option("topic", "ns-exercise")
-      .option("checkpointLocation", "checkpoint/kafka_checkpoint")
-      .start()
-      .awaitTermination()
+      .option("kafka.bootstrap.servers", "host1:port1,host2:port2")
+      .option("subscribe", "ns-exercise")
+      .format("kafka")
+      .format("com.databricks.spark.xml")
+      .load()
 
-
-
-
-
-
-
+    // output to Parquet with partitioning by Date
+    // see also https://spark.apache.org/docs/latest/sql-data-sources-parquet.html#configuration
+    consumerDF.write.partitionBy("Date", "key").parquet("hdfs://data.parquet")
 
 
 

@@ -1,6 +1,20 @@
 <Locomotives>
-    <Locomotive id="locomotive-1001" latitude="50" longitude="50">
-    <Locomotive id="locomotive-1002" latitude="50" longitude="50">
-    <Locomotive id="locomotive-1003" latitude="100" longitude="800">
-    <Locomotive id="locomotive-1004" latitude="99" longitude="299">
+    <Locomotive>
+        <Date>"2023-10-31T01:30:00.000-05:00"</Date>
+        <LocomotiveId>1001</LocomotiveId>
+        <Latitude>50</Latitude>
+        <Longitude>50</Longitude>
+    </Locomotive>
+    <Locomotive>
+        <Date>"2023-10-31T01:30:00.000-05:00"</Date>
+        <LocomotiveId>1002</LocomotiveId>
+        <Latitude>100</Latitude>
+        <Longitude>800</Longitude>
+    </Locomotive>
+    <Locomotive>
+        <Date>"2023-11-30T01:30:00.000-05:00"</Date>
+        <LocomotiveId>1003</LocomotiveId>
+        <Latitude>99</Latitude>
+        <Longitude>299</Longitude>
+    </Locomotive>
 </Locomotives>
