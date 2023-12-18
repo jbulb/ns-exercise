@@ -6,41 +6,34 @@ import org.apache.spark.sql.functions.*
 
 object NSProducer:
 
-  @main def produce =
+  @main def nsproducer =
     val spark = SparkSession.builder
       .appName("nsproducer")
       .master(sys.env.getOrElse("SPARK_MASTER_URL", "local[*]"))
       .getOrCreate()
     import spark.implicits.*
 
-    val df = List("hello", "norfolk", "southern").toDF
-    df.show()
+    // read raw data
+    val rawDataDf = spark.read.option("header", true).csv("locomotives.csv")
 
-    runPipelines(spark)
+    // set up streaming dataframe
+    val producerDf = rawDataDf.
+      withColumn("value", concat_ws("|", $"LocomotiveId", $"Latitude", $"Longitude"))
 
-  def runPipelines(spark: SparkSession) =
-
-    val inboundDF = (spark
-      .readStream
-      .format("rate")
-      .option("rowsPerSecond", 1)
-      .load()
-      )
-
-    println(s"\n\n*** Inbound Streaming Pipeline *** - is streaming : ${inboundDF.isStreaming}\n\n")
-    println(s"\n\n*** Output Streaming Pipeline initialization staring in 5 seconds - use CTL-C to exit\n\n")
-    Thread.sleep(5000)
-
-    val outboundDF = inboundDF
-      .withColumn("result", col("value") + lit(1))
-
-    outboundDF
+    // stream result to Kafka
+    producerDf
       .writeStream
-      .outputMode("append")
-      .option("truncate", false)
-      .format("console")
+      .format("kafka")
+      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("topic", "ns-exercise")
+      .option("checkpointLocation", "checkpoint/kafka_checkpoint")
       .start()
       .awaitTermination()
+
+
+
+
+
 
 
 

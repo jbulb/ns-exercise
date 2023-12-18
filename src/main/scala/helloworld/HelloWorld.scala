@@ -4,7 +4,7 @@ import org.apache.spark.sql
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.*
 
-object NorfolkSouthernExercise:
+object HelloWorld:
 
   @main def run =
     val spark = SparkSession.builder
@@ -13,7 +13,7 @@ object NorfolkSouthernExercise:
       .getOrCreate()
     import spark.implicits._
 
-    val df = List("hello", "norfolk", "southern", "exercise").toDF
+    val df = List("hello", "norfolk", "southern").toDF
     df.show()
 
     runPipelines(spark)
