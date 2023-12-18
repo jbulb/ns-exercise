@@ -1,0 +1,6 @@
+<Locomotives>
+    <Locomotive id="locomotive-1001" latitude="50" longitude="50">
+    <Locomotive id="locomotive-1002" latitude="50" longitude="50">
+    <Locomotive id="locomotive-1003" latitude="100" longitude="800">
+    <Locomotive id="locomotive-1004" latitude="99" longitude="299">
+</Locomotives>
