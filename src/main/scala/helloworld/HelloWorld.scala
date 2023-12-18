@@ -13,7 +13,7 @@ object HelloWorld:
       .getOrCreate()
     import spark.implicits._
 
-    val df = List("hello", "norfolk", "southern").toDF
+    val df = List("hello", "norfolk", "southern", "exercise").toDF
     df.show()
 
     runPipelines(spark)
