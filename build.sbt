@@ -9,16 +9,4 @@ libraryDependencies ++= Seq(
 // include the 'provided' Spark dependency on the classpath for `sbt run`
 Compile / run := Defaults.runTask(Compile / fullClasspath, Compile / run / mainClass, Compile / run / runner).evaluated
 
-import sbt._
-
-val Hello = config("helloworld") extend (Compile)
-val Producer = config("nsproducer") extend (Compile)
-
-def withPackage(name: String, main: String): Seq[Def.Setting[_]] =
-  baseAssemblySettings ++ inTask(assembly)(
-    Seq(
-      mainClass       := Some(main),
-      assemblyJarName := s"$name.jar"
-    )
-  )
 
